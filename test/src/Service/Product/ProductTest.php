@@ -52,7 +52,7 @@ class ProductTest extends TestCase
 
         yield 'product list' => [
             [
-                new ProductEntity(3, 'Another', 50.11),
+                new ProductEntity(3, 'Another', 50.11, 'test'),
             ]
         ];
     }
@@ -97,15 +97,15 @@ class ProductTest extends TestCase
 
         yield 'product list' => [
             [
-                new ProductEntity(3, 'Another', 50.11),
-                new ProductEntity(10, 'Test', 199.99),
+                new ProductEntity(3, 'Another', 50.11, 'test1'),
+                new ProductEntity(10, 'Test', 199.99, 'test2'),
             ]
         ];
 
         yield 'product list with extreme values' => [
             [
-                new ProductEntity(0, '', 0),
-                new ProductEntity(PHP_INT_MAX, 'Test', 1.7976931348623e+308),
+                new ProductEntity(0, '', 0, 'test1'),
+                new ProductEntity(PHP_INT_MAX, 'Test', 1.7976931348623e+308, 'test3'),
             ]
         ];
     }
