@@ -8,6 +8,21 @@ use Model\Entity;
 
 class User
 {
+/**
+     * Получаем всех пользователей
+     *
+     * @return Entity\User[]
+     */
+    public function fetchAll(): array
+    {
+        $userList = [];
+        foreach ($this->getDataFromSource() as $item) {
+            $userList[] = $this->createUser($item);
+        }
+
+        return $userList;
+    }
+
     /**
      * Получаем пользователя по идентификатору
      *

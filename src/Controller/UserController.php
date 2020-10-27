@@ -6,6 +6,7 @@ namespace Controller;
 
 use Framework\Render;
 use Service\User\Security;
+use Service\User\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,5 +51,23 @@ class UserController
         (new Security($request->getSession()))->logout();
 
         return $this->redirect('index');
+    }
+
+/**
+     * Список пользователей
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function listUsersAction(Request $request): Response
+    {
+        $adminCheck = (new Security($request->getSession()))->isAdmin();
+        if($adminCheck){
+            $userList = (new User())->getAll();
+            return $this->render('user/list.html.php', ['userList' => $userList]);
+        }
+        else{
+            return $this->render('error404.html.php', []);
+        }
     }
 }

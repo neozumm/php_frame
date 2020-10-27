@@ -39,6 +39,10 @@ $routes->add(
     new Route('/product/list_descriptions', ['_controller' => [ProductController::class, 'listDescriptionAction']])
 );
 $routes->add(
+    'user_list',
+    new Route('/user/list', ['_controller' => [\Controller\UserController::class, 'listUsersAction']])
+);
+$routes->add(
     'user_authentication',
     new Route('/user/authentication', ['_controller' => [\Controller\UserController::class, 'authenticationAction']])
 );

@@ -30,6 +30,19 @@ class Security implements ISecurity
 
         return $userId ? (new Model\Repository\User())->getById($userId) : null;
     }
+/**
+     * @inheritdoc
+     */
+    public function isAdmin(): bool
+    {
+        if ($this->isLogged()){
+            $role = $this->getUser()->getRole()->getType();
+            return $role === 'admin' ? true : false;
+        }
+        else{
+            return false;
+        }
+    }
 
     /**
      * @inheritdoc
