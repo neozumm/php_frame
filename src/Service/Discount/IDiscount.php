@@ -9,7 +9,10 @@ interface IDiscount
     /**
      * Получаем скидку в процентах
      *
+     * @param Entity\User $user
+     * @param float $totalprice
+     * @param string[] $basket
      * @return float
      */
-    public function getDiscount(): float;
+    public function getDiscount($user, $totalprice, $basket): float;
 }

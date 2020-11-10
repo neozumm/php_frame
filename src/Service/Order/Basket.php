@@ -10,7 +10,7 @@ use Service\Billing\IBilling;
 use Service\Communication\Email;
 use Service\Communication\ICommunication;
 use Service\Discount\IDiscount;
-use Service\Discount\NullObject;
+use Service\Discount\Discount;
 use Service\User\ISecurity;
 use Service\User\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -85,7 +85,7 @@ class Basket
         $billing = new Card();
 
         // Здесь должна быть некоторая логика получения информации о скидки пользователя
-        $discount = new NullObject();
+        $discount = new Discount();
 
         // Здесь должна быть некоторая логика получения способа уведомления пользователя о покупке
         $communication = new Email();
@@ -111,16 +111,18 @@ class Basket
         ICommunication $communication
     ): void {
         $totalPrice = 0;
+        $basket = [];
         foreach ($this->getProductsInfo() as $product) {
             $totalPrice += $product->getPrice();
+            $basket[]=$product->getName();
         }
 
-        $discount = $discount->getDiscount();
+        $user = $security->getUser();
+        $discount = $discount->getDiscount($user, $totalPrice, $basket);
         $totalPrice = $totalPrice - $totalPrice / 100 * $discount;
 
         $billing->pay($totalPrice);
 
-        $user = $security->getUser();
         $communication->process($user, 'checkout_template');
     }
 

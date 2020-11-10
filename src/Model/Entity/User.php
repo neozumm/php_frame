@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Model\Entity;
 
+use DateTimeImmutable;
+
 class User
 {
     /**
@@ -32,19 +34,36 @@ class User
     private $role;
 
     /**
+     * @var DateTimeImmutable
+     *
+     */
+    private $bdate;
+
+    /**
+     * @var int
+     *
+     */
+    private $lastPurchase;
+
+    /**
      * @param int $id
      * @param string $name
      * @param string $login
      * @param string $password
      * @param Role $role
+     * @param DateTimeImmutable $bdate
+     * @param int $lastPurchase
+     *
      */
-    public function __construct(int $id, string $name, string $login, string $password, Role $role)
+    public function __construct(int $id, string $name, string $login, string $password, Role $role, DateTimeImmutable $bdate, int $lastPurchase)
     {
         $this->id = $id;
         $this->name = $name;
         $this->login = $login;
         $this->passwordHash = $password;
         $this->role = $role;
+        $this->bdate = $bdate;
+        $this->lastPurchase = $lastPurchase;
     }
 
     /**
@@ -61,6 +80,14 @@ class User
     public function getName(): string
     {
         return $this->name;
+    }
+
+/**
+     * @return string
+     */
+    public function getPurchase(): int
+    {
+        return $this->lastPurchase;
     }
 
     /**
@@ -85,5 +112,13 @@ class User
     public function getRole(): Role
     {
         return $this->role;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getBdate(): DateTimeImmutable
+    {
+        return $this->bdate;
     }
 }

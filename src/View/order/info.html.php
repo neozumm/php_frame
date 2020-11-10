@@ -2,8 +2,9 @@
 
 /** @var \Model\Entity\Product[] $productList */
 /** @var bool $isLogged */
+/** @var float $discount */
 /** @var \Closure $path */
-$body = function () use ($productList, $isLogged, $path) {
+$body = function () use ($productList, $isLogged, $discount, $path) {
     ?>
     <form method="post">
         <table cellpadding="10">
@@ -30,6 +31,12 @@ $body = function () use ($productList, $isLogged, $path) {
 <?php if ($totalPrice > 0) {
         if ($isLogged) {
             ?>
+            <tr>
+                <td colspan="3" align="center">Скидка: <?=$discount*100 ?>%</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">Сумма со скидкой: <?=$totalPrice-$totalPrice/(100*$discount) ?> руб</td>
+            </tr>
             <tr>
                 <td colspan="3" align="center"><input type="submit" value="Оформить заказ" /></td>
             </tr>

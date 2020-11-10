@@ -43,6 +43,10 @@ $routes->add(
     new Route('/user/list', ['_controller' => [\Controller\UserController::class, 'listUsersAction']])
 );
 $routes->add(
+    'lk',
+    new Route('/user/lk', ['_controller' => [\Controller\UserController::class, 'lkUserAction']])
+);
+$routes->add(
     'user_authentication',
     new Route('/user/authentication', ['_controller' => [\Controller\UserController::class, 'authenticationAction']])
 );

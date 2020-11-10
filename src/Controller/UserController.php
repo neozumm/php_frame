@@ -70,4 +70,16 @@ class UserController
             return $this->render('error404.html.php', []);
         }
     }
+
+/**
+     * Личный кабинет пользователя
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function lkUserAction(Request $request): Response
+    {
+        $user = (new Security($request->getSession()))->getUser();
+        return $this->render('user/lk.html.php', ['user'=>$user]);
+    }
 }

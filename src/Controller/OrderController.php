@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Controller;
 
 use Framework\Render;
+use Service\Discount\Discount;
 use Service\Order\Basket;
 use Service\User\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +29,18 @@ class OrderController
 
         $productList = (new Basket($request->getSession()))->getProductsInfo();
         $isLogged = (new Security($request->getSession()))->isLogged();
-
-        return $this->render('order/info.html.php', ['productList' => $productList, 'isLogged' => $isLogged]);
+        $totalprice=0;
+        foreach ($productList as $product){
+            $totalprice += $product->getPrice();
+            $basket[]=$product->getName();
+        }
+        if($isLogged){
+            $discount=(new Discount)->getDiscount((new Security($request->getSession()))->getUser(), $totalprice, $basket);
+        }
+        else{
+            $discount=0;
+        }
+        return $this->render('order/info.html.php', ['productList' => $productList, 'isLogged' => $isLogged, 'discount'=> $discount]);
     }
 
     /**
