@@ -35,23 +35,26 @@ class BasketBuilder
     *   @param IDiscount $discount
     *   @return void
      */
-    public function setDiscount($discount): void {
+    public function setDiscount($discount): void
+    {
         $this->discount=$discount;
     }
 
-/**
-    *   @param array $basket
-    *   @return void
-     */
-    public function setBasket($basket): void {
+    /**
+        *   @param array $basket
+        *   @return void
+         */
+    public function setBasket($basket): void
+    {
         $this->basket=$basket;
     }
 
-/**
-    *   @param float $fullPrice
-    *   @return void
-     */
-    public function setFullPrice($fullPrice): void {
+    /**
+        *   @param float $fullPrice
+        *   @return void
+         */
+    public function setFullPrice($fullPrice): void
+    {
         $this->fullPrice=$fullPrice;
     }
 
@@ -59,7 +62,8 @@ class BasketBuilder
     *   @param IBilling $billing
     *   @return void
      */
-    public function setBilling($billing): void {
+    public function setBilling($billing): void
+    {
         $this->billing=$billing;
     }
 
@@ -67,7 +71,8 @@ class BasketBuilder
     *   @param ISecurity $security
     *   @return void
      */
-    public function setSecurity($security): void {
+    public function setSecurity($security): void
+    {
         $this->security=$security;
     }
 
@@ -75,54 +80,62 @@ class BasketBuilder
     *   @param ICommunication $communication
     *   @return void
      */
-    public function setCommunication($communication): void {
+    public function setCommunication($communication): void
+    {
         $this->communication=$communication;
     }
 
     /**
      *@return IDiscount
      */
-    public function getDiscount(): IDiscount {
+    public function getDiscount(): IDiscount
+    {
         return $this->discount;
     }
 
     /**
      *@return IBilling
      */
-    public function getBilling():IBilling {
+    public function getBilling():IBilling
+    {
         return $this->billing;
     }
 
     /**
      *@return ISecurity
      */
-    public function getSecurity():ISecurity {
+    public function getSecurity():ISecurity
+    {
         return $this->security;
     }
 
     /**
      *@return ICommunication
      */
-    public function getCommunication():ICommunication {
+    public function getCommunication():ICommunication
+    {
         return $this->communication;
     }
 
     /**
      *@return float
      */
-    public function getFullPrice(): float {
+    public function getFullPrice(): float
+    {
         return $this->fullPrice;
     }
 
     /**
      *@return array
      */
-    public function getBasket():array {
+    public function getBasket():array
+    {
         return $this->basket;
     }
 
     /** @return CheckoutProcess */
-    public function build(): CheckoutProcess {
+    public function build(): CheckoutProcess
+    {
         return new CheckoutProcess($this);
     }
 }

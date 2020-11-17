@@ -10,7 +10,7 @@ use Service\Communication\ICommunication;
 
 class CheckoutProcess
 {
-/** @var float */
+    /** @var float */
     private $fullPrice;
 
     /** @var array */

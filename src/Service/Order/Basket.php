@@ -106,7 +106,6 @@ class Basket
         $basketBuilder->setDiscount($discount);
         $checkout= $basketBuilder->build();
         $checkout->checkoutProcess();
-
     }
 
 
