@@ -2,7 +2,7 @@
 
 /** @var \Model\Entity\User[] $userList */
 $body = function () use ($userList, $path) {
-?>
+    ?>
   <table cellpadding="40" cellspacing="0" border="0">
     <tr>
       <td colspan="3" align="center">Список пользователей</td>
@@ -10,7 +10,7 @@ $body = function () use ($userList, $path) {
 
     <?php
     foreach ($userList as $key => $user) {
-    ?>
+        ?>
       <tr style="text-align: center">
                                <td>
         <p>Пользователь: <?= $user->getName() ?></p>
@@ -25,8 +25,8 @@ $body = function () use ($userList, $path) {
 };
 
 $renderLayout(
-  'main_template.html.php',
-  [
+    'main_template.html.php',
+    [
     'title' => 'Описание курсов',
     'body' => $body,
   ]

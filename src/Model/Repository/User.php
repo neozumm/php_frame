@@ -10,11 +10,11 @@ use Model\Entity;
 
 class User
 {
-/**
-     * Получаем всех пользователей
-     *
-     * @return Entity\User[]
-     */
+    /**
+         * Получаем всех пользователей
+         *
+         * @return Entity\User[]
+         */
     public function fetchAll(): array
     {
         $userList = [];

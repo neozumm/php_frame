@@ -30,14 +30,13 @@ class OrderController
         $productList = (new Basket($request->getSession()))->getProductsInfo();
         $isLogged = (new Security($request->getSession()))->isLogged();
         $totalprice=0;
-        foreach ($productList as $product){
+        foreach ($productList as $product) {
             $totalprice += $product->getPrice();
             $basket[]=$product->getName();
         }
-        if($isLogged){
+        if ($isLogged) {
             $discount=(new Discount)->getDiscount((new Security($request->getSession()))->getUser(), $totalprice, $basket);
-        }
-        else{
+        } else {
             $discount=0;
         }
         return $this->render('order/info.html.php', ['productList' => $productList, 'isLogged' => $isLogged, 'discount'=> $discount]);

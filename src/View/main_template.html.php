@@ -19,18 +19,18 @@
                                     <tr><td><a href="<?= $path('order_info') ?>">Корзина</a></td></tr>
                                     <tr><td><a href="<?= $path('product_descriptions') ?>">Описание товаров</a></td></tr>
                                     <?php if ($isAdmin) {
-                                    ?>
+    ?>
                                         <tr><td><a href="<?= $path('user_list') ?>">список пользователей</a></td></tr>
                                     <?php
-                                    } ?>
+} ?>
 
                                     <?php
                                     if (!$isAuth) {
-                                    ?>
+                                        ?>
                                         <tr><td><a href="<?= $path('user_authentication') ?>">Авторизация</a></td></tr>
                                     <?php
                                     } else {
-                                    ?>
+                                        ?>
                                         <tr><td><a href="<?= $path('lk') ?>">Личный кабинет</a></td></tr>
                                         <tr><td><a href="<?= $path('logout') ?>">Выход</a></td></tr>
                                     <?php

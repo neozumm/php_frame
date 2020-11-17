@@ -53,30 +53,29 @@ class UserController
         return $this->redirect('index');
     }
 
-/**
-     * Список пользователей
-     *
-     * @param Request $request
-     * @return Response
-     */
+    /**
+         * Список пользователей
+         *
+         * @param Request $request
+         * @return Response
+         */
     public function listUsersAction(Request $request): Response
     {
         $adminCheck = (new Security($request->getSession()))->isAdmin();
-        if($adminCheck){
+        if ($adminCheck) {
             $userList = (new User())->getAll();
             return $this->render('user/list.html.php', ['userList' => $userList]);
-        }
-        else{
+        } else {
             return $this->render('error404.html.php', []);
         }
     }
 
-/**
-     * Личный кабинет пользователя
-     *
-     * @param Request $request
-     * @return Response
-     */
+    /**
+         * Личный кабинет пользователя
+         *
+         * @param Request $request
+         * @return Response
+         */
     public function lkUserAction(Request $request): Response
     {
         $user = (new Security($request->getSession()))->getUser();

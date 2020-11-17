@@ -30,10 +30,9 @@ class Discount implements IDiscount
      */
     public function checkTotal($totalprice): bool
     {
-        if($totalprice>=40000){
+        if ($totalprice>=40000) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }

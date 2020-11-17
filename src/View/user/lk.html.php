@@ -2,8 +2,8 @@
 
 
 /** @var \Model\Entity\User $user */
-$body = function () use ($user, $path){
-?>
+$body = function () use ($user, $path) {
+    ?>
   <table cellpadding="40" cellspacing="0" border="0">
     <tr>
       <td align="center">Личный кабинет</td>
@@ -22,8 +22,8 @@ $body = function () use ($user, $path){
 };
 
 $renderLayout(
-  'main_template.html.php',
-  [
+    'main_template.html.php',
+    [
     'title' => 'Описание курсов',
     'body' => $body,
   ]

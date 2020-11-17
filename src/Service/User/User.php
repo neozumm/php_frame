@@ -8,12 +8,12 @@ use Model;
 
 class User
 {
-/**
-     * Получаем информацию по конкретному пользователю
-     *
-     * @param int $id
-     * @return Model\Entity\User|null
-     */
+    /**
+         * Получаем информацию по конкретному пользователю
+         *
+         * @param int $id
+         * @return Model\Entity\User|null
+         */
     public function getInfo(int $id): ?Model\Entity\User
     {
         $user = $this->getUserRepository()->getById($id);

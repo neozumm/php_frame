@@ -82,9 +82,9 @@ class User
         return $this->name;
     }
 
-/**
-     * @return string
-     */
+    /**
+         * @return string
+         */
     public function getPurchase(): int
     {
         return $this->lastPurchase;
