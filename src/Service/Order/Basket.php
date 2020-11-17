@@ -91,40 +91,24 @@ class Basket
         $communication = new Email();
 
         $security = new Security($this->session);
-
-        $this->checkoutProcess($discount, $billing, $security, $communication);
-    }
-
-    /**
-     * Проведение всех этапов заказа
-     *
-     * @param IDiscount $discount,
-     * @param IBilling $billing,
-     * @param ISecurity $security,
-     * @param ICommunication $communication
-     * @return void
-     */
-    public function checkoutProcess(
-        IDiscount $discount,
-        IBilling $billing,
-        ISecurity $security,
-        ICommunication $communication
-    ): void {
-        $totalPrice = 0;
+        $fullPrice = 0;
         $basket = [];
         foreach ($this->getProductsInfo() as $product) {
-            $totalPrice += $product->getPrice();
+            $fullPrice += $product->getPrice();
             $basket[]=$product->getName();
         }
+        $basketBuilder = new BasketBuilder();
+        $basketBuilder->setBasket($basket);
+        $basketBuilder->setFullPrice($fullPrice);
+        $basketBuilder->setBilling($billing);
+        $basketBuilder->setSecurity($security);
+        $basketBuilder->setCommunication($communication);
+        $basketBuilder->setDiscount($discount);
+        $checkout= $basketBuilder->build();
+        $checkout->checkoutProcess();
 
-        $user = $security->getUser();
-        $discount = $discount->getDiscount($user, $totalPrice, $basket);
-        $totalPrice = $totalPrice - $totalPrice / 100 * $discount;
-
-        $billing->pay($totalPrice);
-
-        $communication->process($user, 'checkout_template');
     }
+
 
     /**
      * Фабричный метод для репозитория Product

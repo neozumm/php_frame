@@ -35,7 +35,19 @@ $body = function () use ($productList, $isLogged, $discount, $path) {
                 <td colspan="3" align="center">Скидка: <?=$discount*100 ?>%</td>
             </tr>
             <tr>
+                <?php
+                if($discount == 0){
+            ?>
+
+                <td colspan="3" align="center">Сумма со скидкой: <?=$totalPrice ?> руб</td>
+                <?php
+                }
+                else{
+            ?>
                 <td colspan="3" align="center">Сумма со скидкой: <?=$totalPrice-$totalPrice/(100*$discount) ?> руб</td>
+                <?php
+                }
+            ?>
             </tr>
             <tr>
                 <td colspan="3" align="center"><input type="submit" value="Оформить заказ" /></td>
