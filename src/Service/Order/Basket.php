@@ -14,6 +14,7 @@ use Service\Discount\Discount;
 use Service\User\ISecurity;
 use Service\User\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Service\Order\FacadeCheckout;
 
 class Basket
 {
@@ -81,31 +82,7 @@ class Basket
      */
     public function checkout(): void
     {
-        // Здесь должна быть некоторая логика выбора способа платежа
-        $billing = new Card();
-
-        // Здесь должна быть некоторая логика получения информации о скидки пользователя
-        $discount = new Discount();
-
-        // Здесь должна быть некоторая логика получения способа уведомления пользователя о покупке
-        $communication = new Email();
-
-        $security = new Security($this->session);
-        $fullPrice = 0;
-        $basket = [];
-        foreach ($this->getProductsInfo() as $product) {
-            $fullPrice += $product->getPrice();
-            $basket[]=$product->getName();
-        }
-        $basketBuilder = new BasketBuilder();
-        $basketBuilder->setBasket($basket);
-        $basketBuilder->setFullPrice($fullPrice);
-        $basketBuilder->setBilling($billing);
-        $basketBuilder->setSecurity($security);
-        $basketBuilder->setCommunication($communication);
-        $basketBuilder->setDiscount($discount);
-        $checkout= $basketBuilder->build();
-        $checkout->checkoutProcess();
+       ( new FacadeCheckout() )->checkout();
     }
 
 
