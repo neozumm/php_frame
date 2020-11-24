@@ -14,10 +14,10 @@ use Service\Discount\Discount;
 use Service\User\ISecurity;
 use Service\User\Security;
 
-
-class FacadeCheckoutProcess {
-
-    function checkoutProcess($basket, $fullPrice, $billing, $security, $communication, $discount) {
+class FacadeCheckoutProcess
+{
+    public function checkoutProcess($basket, $fullPrice, $billing, $security, $communication, $discount)
+    {
         $basketBuilder = new BasketBuilder();
         $basketBuilder->setBasket($basket);
         $basketBuilder->setFullPrice($fullPrice);
@@ -27,6 +27,5 @@ class FacadeCheckoutProcess {
         $basketBuilder->setDiscount($discount);
         $checkout= $basketBuilder->build();
         $checkout->checkoutProcess();
-
     }
 }

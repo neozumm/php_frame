@@ -15,7 +15,8 @@ use Service\User\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Service\Order\FacadeCheckoutProcess;
 
-class FacadeCheckout{
+class FacadeCheckout
+{
 
 /**
      * Оформление заказа
@@ -42,7 +43,5 @@ class FacadeCheckout{
             $basket[]=$product->getName();
         }
         (new FacadeCheckoutProcess)->checkoutProcess($basket, $fullPrice, $billing, $security, $communication, $discount);
-
     }
-
 }

@@ -82,7 +82,7 @@ class Basket
      */
     public function checkout(): void
     {
-       ( new FacadeCheckout() )->checkout();
+        ( new FacadeCheckout() )->checkout();
     }
 
 
