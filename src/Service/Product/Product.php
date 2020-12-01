@@ -30,12 +30,14 @@ class Product
     public function getAll(string $sortType): array
     {
         $productList = $this->getProductRepository()->fetchAll();
-
-        // Применить паттерн Стратегия
-        // $sortType === 'price'; // Сортировка по цене
-        // $sortType === 'name'; // Сортировка по имени
-
-        return $productList;
+        $sortContext = new SortContext();
+        $sortStrat = new SortStrategyEmpty();
+        if ($sortType === 'price') {
+            $sortStrat = new SortStrategyPrice();
+        } elseif ($sortType === 'name') {
+            $sortStrat = new SortStrategyName();
+        }
+        return $sortContext->sortWrap($sortStrat, $productList);
     }
 
     /**
