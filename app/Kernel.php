@@ -53,8 +53,8 @@ class Kernel
         $registerConfigCommand = new RegisterConfCommand($registerConfigsReciever, $dir);
         $registerRoutesCommand = new RegisterRoutesCommand($registerRoutesReciever, $this->routeCollection, $this->containerBuilder, $dir);
         $invoker = new Invoker();
-        // $invoker->action($registerConfigCommand);
-        $this->registerConfigs();
+        $invoker->action($registerConfigCommand);
+        // $this->registerConfigs();
         $propArray = $invoker->action($registerRoutesCommand);
         $this->routeCollection=$propArray[0];
         $this->containerBuilder=$propArray[1];
