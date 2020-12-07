@@ -3,6 +3,12 @@
 declare(strict_types = 1);
 
 use Framework\Registry;
+use Framework\RegisterConfReciever;
+use Framework\RegisterRoutesReciever;
+use Framework\ICommand;
+use Framework\RegisterConfCommand;
+use Framework\RegisterRoutesCommand;
+use Framework\Invoker;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -39,8 +45,19 @@ class Kernel
      */
     public function handle(Request $request): Response
     {
+        // $this->registerConfigs();
+        // $this->registerRoutes();
+        $registerConfigsReciever = new RegisterConfReciever();
+        $registerRoutesReciever = new RegisterRoutesReciever();
+        $dir = dirname(__FILE__);
+        $registerConfigCommand = new RegisterConfCommand($registerConfigsReciever, $dir);
+        $registerRoutesCommand = new RegisterRoutesCommand($registerRoutesReciever, $this->routeCollection, $this->containerBuilder, $dir);
+        $invoker = new Invoker();
+        // $invoker->action($registerConfigCommand);
         $this->registerConfigs();
-        $this->registerRoutes();
+        $propArray = $invoker->action($registerRoutesCommand);
+        $this->routeCollection=$propArray[0];
+        $this->containerBuilder=$propArray[1];
 
         return $this->process($request);
     }
