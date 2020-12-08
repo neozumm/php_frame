@@ -50,7 +50,7 @@ class Kernel
         $registerConfigsReciever = new RegisterConfReciever();
         $registerRoutesReciever = new RegisterRoutesReciever();
         $dir = dirname(__FILE__);
-        $registerConfigCommand = new RegisterConfCommand($registerConfigsReciever, $dir);
+        $registerConfigCommand = new RegisterConfCommand($registerConfigsReciever, $dir, $this->containerBuilder);
         $registerRoutesCommand = new RegisterRoutesCommand($registerRoutesReciever, $this->routeCollection, $this->containerBuilder, $dir);
         $invoker = new Invoker();
         $invoker->action($registerConfigCommand);
